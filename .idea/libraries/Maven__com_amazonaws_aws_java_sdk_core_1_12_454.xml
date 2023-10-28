@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Maven: com.amazonaws:aws-java-sdk-core:1.12.454" type="java-imported" external-system-id="Maven">
+    <properties groupId="com.amazonaws" artifactId="aws-java-sdk-core" version="1.12.454" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-core/1.12.454/aws-java-sdk-core-1.12.454.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-core/1.12.454/aws-java-sdk-core-1.12.454-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-core/1.12.454/aws-java-sdk-core-1.12.454-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
