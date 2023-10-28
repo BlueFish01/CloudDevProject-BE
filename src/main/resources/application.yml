@@ -1,7 +1,7 @@
 spring:
   datasource:
     url: jdbc:mysql://devlog.cwmrubevoikp.us-east-1.rds.amazonaws.com:3306/devlog
-    username:
+    username: 
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
@@ -13,6 +13,7 @@ spring:
       accesskey:
       secretkey:
       sessiontoken:
+
       region: us-east-1  # e.g., us-east-1
       endpoint: https://dynamodb.us-east-1.amazonaws.com
       s3bucket-name: devlogresource

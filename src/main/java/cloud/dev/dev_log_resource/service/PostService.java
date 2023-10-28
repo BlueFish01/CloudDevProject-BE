@@ -6,18 +6,20 @@ import cloud.dev.dev_log_resource.entity.PostEntity;
 import cloud.dev.dev_log_resource.repository.PostDao;
 import cloud.dev.dev_log_resource.repository.PostDynamoRepository;
 import cloud.dev.dev_log_resource.repository.PostRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Service
+@Slf4j
 public class PostService {
 
     @Autowired
@@ -35,43 +37,54 @@ public class PostService {
 
     @Value("${spring.amazon.aws.s3Url}")
     private String s3Url;
-    public void create(PostDto postDto, MultipartFile image, Authentication authentication) throws IOException {
-        int postId;
-        Integer userId = userService.getUserId(jwtService.getUsername(authentication));
+    public PostDynamoEntity create(PostDto postDto, MultipartFile image, Authentication authentication) throws Exception {
+        try {
+            log.info("Start PostService.create()");
 
-        List<PostDto> lastId = postDao.getLastID();
-        try{
-            lastId.get(0).getPostId();
-            postId = lastId.get(0).getPostId() + 1;
+            int postId;
+            Integer userId = userService.getUserId(jwtService.getUsername(authentication));
+
+            List<PostDto> lastId = postDao.getLastID();
+            try{
+                lastId.get(0).getPostId();
+                postId = lastId.get(0).getPostId() + 1;
+            }
+            catch (Exception e){
+                postId = 1;
+            }
+
+
+            PostEntity postEntity = new PostEntity();
+            postEntity.setPostId(postId);
+            postEntity.setPostOwner(userId);
+            postEntity.setPostTitle(postDto.getPostTitle());
+            postRepository.save(postEntity);
+
+            String imageFileName = "post-" + postId;
+            String postCoverUrl = s3Url + imageFileName;
+
+            PostDynamoEntity postDynamoEntity = new PostDynamoEntity();
+            postDynamoEntity.setUserId(userId);
+            postDynamoEntity.setPostId(postId);
+            postDynamoEntity.setPostTitle(postDto.getPostTitle());
+            postDynamoEntity.setPostDescription(postDto.getPostDescription());
+            postDynamoEntity.setPostContent(postDto.getPostContent());
+            postDynamoEntity.setPostCover(postCoverUrl);
+            postDynamoEntity.setPostCreateDate(String.valueOf(new Timestamp(System.currentTimeMillis())));
+            postDynamoRepository.savePost(postDynamoEntity);
+            awsS3Service.putImage(image, imageFileName);
+
+            return postDynamoRepository.getPostById(userId, postId);
+
         }
-        catch (Exception e){
-            postId = 1;
+        catch (Exception e) {
+            log.info("Error PostService.create()");
+            throw new Exception(HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
         }
 
-
-        PostEntity postEntity = new PostEntity();
-        postEntity.setPostId(postId);
-        postEntity.setPostOwner(userId);
-        postEntity.setPostTitle(postDto.getPostTitle());
-        postRepository.save(postEntity);
-
-        String imageFileName = "post-" + postId;
-        String postCoverUrl = s3Url + imageFileName;
-
-        PostDynamoEntity postDynamoEntity = new PostDynamoEntity();
-        postDynamoEntity.setUserId(userId);
-        postDynamoEntity.setPostId(postId);
-        postDynamoEntity.setPostTitle(postDto.getPostTitle());
-        postDynamoEntity.setPostDescription(postDto.getPostDescription());
-        postDynamoEntity.setPostContent(postDto.getPostContent());
-        postDynamoEntity.setPostCover(postCoverUrl);
-        postDynamoEntity.setPostCreateDate(new Timestamp(System.currentTimeMillis()));
-        postDynamoRepository.savePost(postDynamoEntity);
-
-
-
-        awsS3Service.putImage(image, imageFileName);
-
+        finally {
+            log.info("End PostService.create()");
+        }
     }
 
 
