@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Maven: org.springframework:spring-aspects:5.3.29" type="java-imported" external-system-id="Maven">
+    <properties groupId="org.springframework" artifactId="spring-aspects" version="5.3.29" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aspects/5.3.29/spring-aspects-5.3.29.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aspects/5.3.29/spring-aspects-5.3.29-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aspects/5.3.29/spring-aspects-5.3.29-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
