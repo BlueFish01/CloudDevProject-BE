@@ -1,9 +1,6 @@
 package cloud.dev.dev_log_resource.entity;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -34,10 +31,10 @@ public class PostDynamoEntity {
     private String postCover;
 
     @DynamoDBAttribute(attributeName = "post_create_date")
-    private Timestamp postCreateDate;
+    private String postCreateDate;
 
     @DynamoDBAttribute(attributeName = "post_edit_date")
-    private Timestamp postEditDate;
+    private String postEditDate;
 
 
 

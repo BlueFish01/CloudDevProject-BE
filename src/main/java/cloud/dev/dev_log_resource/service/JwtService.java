@@ -2,28 +2,45 @@ package cloud.dev.dev_log_resource.service;
 
 import cloud.dev.dev_log_resource.entity.PostDynamoEntity;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class JwtService {
 
 
-    public String getUsername(Authentication authentication){
-        if (authentication.isAuthenticated() && authentication.getPrincipal() instanceof Jwt jwt) {
+    public String getUsername(Authentication authentication) throws Exception{
+        try{
+            log.info("Error JwtService.getUsername()");
 
-            // Get the username from the JWT claims
-            String username = jwt.getClaim("sub");
-            PostDynamoEntity test = new PostDynamoEntity();
-            // You can also access other claims as needed
-            // For example, if the username claim is stored under a different key, replace "sub" with the correct claim key.
+            if (authentication.isAuthenticated() && authentication.getPrincipal() instanceof Jwt jwt) {
 
-            return username;
+                // Get the username from the JWT claims
+                String username = jwt.getClaim("sub");
+                PostDynamoEntity test = new PostDynamoEntity();
+                // You can also access other claims as needed
+                // For example, if the username claim is stored under a different key, replace "sub" with the correct claim key.
+
+                return username;
+            }
+            else {
+                return null;
+            }
+
         }
-        else {
-            return null;
+
+        catch(Exception e){
+            log.info("Error JwtService.getUsername()");
+            throw new Exception(HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
         }
+        finally {
+            log.info("End JwtService.getUsername()");
+        }
+
     }
 }

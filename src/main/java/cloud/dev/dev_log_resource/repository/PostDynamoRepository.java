@@ -15,6 +15,10 @@ public class PostDynamoRepository{
     public void savePost(PostDynamoEntity postDynamoEntity) {
         dynamoDBMapper.save(postDynamoEntity);
     }
+
+    public PostDynamoEntity getPostById(Integer userId, Integer postId) {
+        return dynamoDBMapper.load(PostDynamoEntity.class, userId, postId);
+    }
 }
 
 
