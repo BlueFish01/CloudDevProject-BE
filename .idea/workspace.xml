@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ea25ec1-ba83-403a-97c5-8bf655f2b7e3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/CloudDevProject-BE.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/PostDynamoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/PostDynamoRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/PostService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
@@ -41,6 +39,9 @@
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2XNP7ibsLLMAAJAS9KAfUxDg8ce" />
   <component name="ProjectViewState">

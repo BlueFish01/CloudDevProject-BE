@@ -10,9 +10,9 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   amazon:
     aws:
-      accesskey: ASIATKFXOLMB63J37QM5
-      secretkey: E1f3RbqYbm/tSoHubV10yUgi1+OJXidjm8/Wy0Vg
-      sessiontoken: FwoGZXIvYXdzEKH//////////wEaDGFeMed9tiThU14AEyLGASPq4hh5ELrNTSqyZEiX4RDW3UWhoBrngIZi3aN94oQZw8rf3JN+Hq280RGM7vrCzQKAfUqBAI4vbeiUOD3a5hBBunHy+W+67YVEIZgTin/FeOEpxXJVXn97Hf8V7Z1f5Mc7CA3+dcCNGMSIiHGxbsT1RXl3awUC9VcVlNku1X0/ESxoRI5o3OnZrNujlVnkS2ELxxOhAG1u3s0VJuBT89FyEF6QFmBTm7xsBb/YwFpJpZH0anVO+QA9qH2jFpoL0NGN02qBhyiIiPipBjItu6EU+yjgDcIxQnPPTbEz/3TmtmaUAkgEW1kR7UHzPuLOB1icTgChKb5YgypR
+      accesskey: ASIATKFXOLMBYQJHDTOG
+      secretkey: bj5Jk7u/h/SWyjRgO5HE7gdnOqpocvAZs+e8xdAY
+      sessiontoken: FwoGZXIvYXdzEL7//////////wEaDLwcQoVi5PTVYO1DRSLGAcGwAbRjJfZdEA2JVlT3BPB+K4wvsmjDwgIu/zqRn7FSortliD/N/iGvHEpb/2nQ7B3BL1h9edwG6OGqJHCkElwyGOWUSpTHrvhPpLWRysOWudcEap1EoQEvP4V6KLCXnqArhmaS1EbkXTC73Ko16NZjvFo7eTg+RiOqHkXix3uWU5o0GOShGCInFkptIS6GLpIYMfk/sIJk8R5Gp4xeYvhmailD5ugOfV17OxhjtLROxu1T5QEhI/MpLTZvlPUf3aDeQ70uriisxP6pBjItPpXXi220QxnWq7+G9h02h+i/M1CI5/4X9+Ea58sJ0Tm6+ke1P9tLYvZtmJgY
 
       region: us-east-1  # e.g., us-east-1
       endpoint: https://dynamodb.us-east-1.amazonaws.com

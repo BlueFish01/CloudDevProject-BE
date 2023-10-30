@@ -59,7 +59,7 @@ public class PostController {
     public ResponseEntity<ResponseModel> getPost(@RequestParam int postId, @CurrentSecurityContext(expression = "authentication") Authentication authentication){
         try {
             log.info("Start PostController.Get Post()");
-            PostDynamoEntity result = postService.getpost(postId, authentication);
+            PostDynamoEntity result = postService.getPost(postId, authentication);
             return ResponseHelper.success(result);
         }
         catch(Exception e) {
@@ -71,12 +71,19 @@ public class PostController {
 
 
 
-
-
-
-    @PostMapping("/edit-post")
-    public ResponseEntity<ResponseModel> editPost(@RequestBody PostDto postDto, @CurrentSecurityContext(expression = "authentication") Authentication authentication){
-        return null;
+    @PutMapping("/edit-post")
+    public ResponseEntity<ResponseModel> editPost(@RequestParam("json") String json, @CurrentSecurityContext(expression = "authentication") Authentication authentication){
+        try{
+            log.info("Start PostController.Get Post()");
+            ObjectMapper objectMapper = new ObjectMapper();
+            PostDto postDto = objectMapper.readValue(json, PostDto.class);
+            PostDynamoEntity result = postService.editPost(postDto,authentication);
+            return ResponseHelper.success(result);
+        }
+        catch (Exception e) {
+            log.info("Error PostController.Get-Post");
+            return ResponseHelper.badRequest(HttpStatus.BAD_REQUEST.toString(),e.getMessage());
+        }
 
     }
 

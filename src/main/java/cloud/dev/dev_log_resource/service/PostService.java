@@ -7,12 +7,15 @@ import cloud.dev.dev_log_resource.repository.PostDao;
 import cloud.dev.dev_log_resource.repository.PostDynamoRepository;
 import cloud.dev.dev_log_resource.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
+
 
 
 import java.sql.Timestamp;
@@ -104,7 +107,30 @@ public class PostService {
 
 
     //edit Post
-
+    public PostDynamoEntity editPost(PostDto postDto, Authentication authentication) throws Exception{
+        try{
+            log.info("Start PostService.getpost()");
+            Integer userId = userService.getUserId(jwtService.getUsername(authentication));
+            log.info("-------->"+userId.toString());
+            PostDynamoEntity postDynamoEntity = postDynamoRepository.getPostById(userId, postDto.getPostId());
+            log.info("dynamo-------->"+postDynamoEntity.toString());
+            if (postDynamoEntity != null) {
+                // Update the post's properties as needed;
+                postDynamoEntity.setPostTitle(postDto.getPostTitle());
+                postDynamoEntity.setPostDescription(postDto.getPostDescription());
+                postDynamoEntity.setPostContent(postDto.getPostContent());
+                postDynamoRepository.savePost(postDynamoEntity);
+            }
+            else{
+                throw new Exception("No Data");
+            }
+            return postDynamoEntity;
+        }
+        catch(Exception e){
+            log.info("Error PostService.editPost()");
+            throw new Exception(HttpStatus.INTERNAL_SERVER_ERROR+ ": "+ e.getMessage());
+        }
+    }
 
 
 
