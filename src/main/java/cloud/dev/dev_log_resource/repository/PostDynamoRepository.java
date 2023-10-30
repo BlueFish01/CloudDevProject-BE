@@ -6,6 +6,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class PostDynamoRepository{
 
@@ -19,6 +21,7 @@ public class PostDynamoRepository{
     public PostDynamoEntity getPostById(Integer userId, Integer postId) {
         return dynamoDBMapper.load(PostDynamoEntity.class, userId, postId);
     }
+
 }
 
 

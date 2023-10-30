@@ -87,6 +87,32 @@ public class PostService {
         }
     }
 
+    //getPost
+    public PostDynamoEntity getPost(int postid, Authentication authentication) throws Exception {
+        try {
+            log.info("Start PostService.getpost() โวยยยยยยย");
+            Integer userId = userService.getUserId(jwtService.getUsername(authentication));
+            return  postDynamoRepository.getPostById(userId,postid);
+
+        }
+        catch(Exception e) {
+            log.info("Error PostService.getpost");
+            throw new Exception(HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
+        }
+    }
+
+
+
+    //edit Post
+
+
+
+
+
+
+
+
+
 
 
 

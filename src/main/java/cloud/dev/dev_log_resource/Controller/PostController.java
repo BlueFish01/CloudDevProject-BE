@@ -57,7 +57,15 @@ public class PostController {
 
     @GetMapping("/get-post")
     public ResponseEntity<ResponseModel> getPost(@RequestParam int postId, @CurrentSecurityContext(expression = "authentication") Authentication authentication){
-        return null;
+        try {
+            log.info("Start PostController.Get Post()");
+            PostDynamoEntity result = postService.getpost(postId, authentication);
+            return ResponseHelper.success(result);
+        }
+        catch(Exception e) {
+            log.info("Error PostController.Get-Post");
+            return ResponseHelper.badRequest(HttpStatus.BAD_REQUEST.toString(),e.getMessage());
+        }
 
     }
 
@@ -67,7 +75,7 @@ public class PostController {
 
 
     @PostMapping("/edit-post")
-    public ResponseEntity<ResponseModel> editPost(@RequestParam int postId, @CurrentSecurityContext(expression = "authentication") Authentication authentication){
+    public ResponseEntity<ResponseModel> editPost(@RequestBody PostDto postDto, @CurrentSecurityContext(expression = "authentication") Authentication authentication){
         return null;
 
     }
