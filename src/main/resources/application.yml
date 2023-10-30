@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://devlog.cwmrubevoikp.us-east-1.rds.amazonaws.com:3306/devlog
-    username: 
-    password:
+    username: admin
+    password: devlogpassword
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -10,9 +10,9 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   amazon:
     aws:
-      accesskey:
-      secretkey:
-      sessiontoken:
+      accesskey: ASIATKFXOLMB63J37QM5
+      secretkey: E1f3RbqYbm/tSoHubV10yUgi1+OJXidjm8/Wy0Vg
+      sessiontoken: FwoGZXIvYXdzEKH//////////wEaDGFeMed9tiThU14AEyLGASPq4hh5ELrNTSqyZEiX4RDW3UWhoBrngIZi3aN94oQZw8rf3JN+Hq280RGM7vrCzQKAfUqBAI4vbeiUOD3a5hBBunHy+W+67YVEIZgTin/FeOEpxXJVXn97Hf8V7Z1f5Mc7CA3+dcCNGMSIiHGxbsT1RXl3awUC9VcVlNku1X0/ESxoRI5o3OnZrNujlVnkS2ELxxOhAG1u3s0VJuBT89FyEF6QFmBTm7xsBb/YwFpJpZH0anVO+QA9qH2jFpoL0NGN02qBhyiIiPipBjItu6EU+yjgDcIxQnPPTbEz/3TmtmaUAkgEW1kR7UHzPuLOB1icTgChKb5YgypR
 
       region: us-east-1  # e.g., us-east-1
       endpoint: https://dynamodb.us-east-1.amazonaws.com
