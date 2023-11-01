@@ -59,7 +59,7 @@ public class PostController {
     public ResponseEntity<ResponseModel> getPost(@RequestParam int postId, @CurrentSecurityContext(expression = "authentication") Authentication authentication){
         try {
             log.info("Start PostController.Get Post()");
-            PostDynamoEntity result = postService.getpost(postId, authentication);
+            PostDynamoEntity result = postService.getPost(postId, authentication);
             return ResponseHelper.success(result);
         }
         catch(Exception e) {
