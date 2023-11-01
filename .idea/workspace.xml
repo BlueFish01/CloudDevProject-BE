@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ea25ec1-ba83-403a-97c5-8bf655f2b7e3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/CloudDevProject-BE.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screenshot 2566-09-08 at 3.22.06 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/BlogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/PostDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/BlogDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/PostDynamoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/BlogDynamoEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/PostEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/BlogEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/BlogDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/PostDynamoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/PostDynamoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/BlogRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/BlogService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +58,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Response-Model&quot;
+    &quot;git-widget-placeholder&quot;: &quot;pooh&quot;
   }
 }</component>
   <component name="RecentsManager">
