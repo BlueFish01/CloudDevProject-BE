@@ -1,12 +1,9 @@
 package cloud.dev.dev_log_resource.repository;
 
-import cloud.dev.dev_log_resource.dto.UserDto;
-import cloud.dev.dev_log_resource.entity.PostDynamoEntity;
+import cloud.dev.dev_log_resource.entity.BlogDynamoEntity;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class PostDynamoRepository{
@@ -14,12 +11,12 @@ public class PostDynamoRepository{
     @Autowired
     private DynamoDBMapper dynamoDBMapper;
 
-    public void savePost(PostDynamoEntity postDynamoEntity) {
-        dynamoDBMapper.save(postDynamoEntity);
+    public void savePost(BlogDynamoEntity blogDynamoEntity) {
+        dynamoDBMapper.save(blogDynamoEntity);
     }
 
-    public PostDynamoEntity getPostById(Integer userId, Integer postId) {
-        return dynamoDBMapper.load(PostDynamoEntity.class, userId, postId);
+    public BlogDynamoEntity getPostById(Integer userId, Integer postId) {
+        return dynamoDBMapper.load(BlogDynamoEntity.class, userId, postId);
     }
 
 }

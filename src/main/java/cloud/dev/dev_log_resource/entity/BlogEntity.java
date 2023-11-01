@@ -1,44 +1,46 @@
 package cloud.dev.dev_log_resource.entity;
 
 import lombok.Data;
-import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "POST")
-public class PostEntity {
+@Table(name = "BLOG")
+public class BlogEntity {
     @Id
-    @Column(name = "post_id")
+    @Column(name = "blog_id")
     private Integer postId;
 
     @Basic
-    @Column(name = "post_owner")
-    private Integer postOwner;
+    @Column(name = "blog_owner")
+    private Integer blogOwner;
 
     @Basic
-    @Column(name = "post_title")
-    private String postTitle;
+    @Column(name = "blog_title")
+    private String blogTitle;
 
     @Basic
-    @Column(name = "post_create_date", updatable = false)
-    private Timestamp postCreateDate;
+    @Column(name = "blog_view")
+    private Integer blogView;
 
     @Basic
-    @Column(name = "post_edit_date", insertable = false)
-    private Timestamp postEditDate;
+    @Column(name = "blog_create_date", updatable = false)
+    private Timestamp blogCreateDate;
+
+    @Basic
+    @Column(name = "blog_edit_date", insertable = false)
+    private Timestamp blogEditDate;
 
     @PrePersist
     public void prePersist() {
-        this.postCreateDate = new Timestamp(System.currentTimeMillis());
+        this.blogCreateDate = new Timestamp(System.currentTimeMillis());
     }
 
     @PreUpdate
     public void preUpdate() {
-        this.postEditDate = new Timestamp(System.currentTimeMillis());
+        this.blogEditDate = new Timestamp(System.currentTimeMillis());
     }
 
 

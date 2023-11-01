@@ -1,11 +1,11 @@
 package cloud.dev.dev_log_resource.service;
 
-import cloud.dev.dev_log_resource.dto.PostDto;
-import cloud.dev.dev_log_resource.entity.PostDynamoEntity;
-import cloud.dev.dev_log_resource.entity.PostEntity;
-import cloud.dev.dev_log_resource.repository.PostDao;
+import cloud.dev.dev_log_resource.dto.BlogDto;
+import cloud.dev.dev_log_resource.entity.BlogDynamoEntity;
+import cloud.dev.dev_log_resource.entity.BlogEntity;
+import cloud.dev.dev_log_resource.repository.BlogDao;
 import cloud.dev.dev_log_resource.repository.PostDynamoRepository;
-import cloud.dev.dev_log_resource.repository.PostRepository;
+import cloud.dev.dev_log_resource.repository.BlogRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,61 +20,62 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class PostService {
+public class BlogService {
 
     @Autowired
     JwtService jwtService;
     @Autowired
     UserService userService;
     @Autowired
-    PostRepository postRepository;
+    BlogRepository blogRepository;
     @Autowired
     PostDynamoRepository postDynamoRepository;
     @Autowired
-    PostDao postDao;
+    BlogDao blogDao;
     @Autowired
     AwsS3Service awsS3Service;
 
     @Value("${spring.amazon.aws.s3Url}")
     private String s3Url;
-    public PostDynamoEntity create(PostDto postDto, MultipartFile image, Authentication authentication) throws Exception {
+
+    public BlogDynamoEntity createBlog(BlogDto blogDto, MultipartFile image, Authentication authentication) throws Exception {
         try {
             log.info("Start PostService.create()");
 
-            int postId;
+            int blogId;
             Integer userId = userService.getUserId(jwtService.getUsername(authentication));
 
-            List<PostDto> lastId = postDao.getLastID();
+            List<BlogDto> lastId = blogDao.getLastID();
             try{
-                lastId.get(0).getPostId();
-                postId = lastId.get(0).getPostId() + 1;
+                lastId.get(0).getBlogId();
+                blogId = lastId.get(0).getBlogId() + 1;
             }
             catch (Exception e){
-                postId = 1;
+                blogId = 1;
             }
 
 
-            PostEntity postEntity = new PostEntity();
-            postEntity.setPostId(postId);
-            postEntity.setPostOwner(userId);
-            postEntity.setPostTitle(postDto.getPostTitle());
-            postRepository.save(postEntity);
+            BlogEntity blogEntity = new BlogEntity();
+            blogEntity.setPostId(blogId);
+            blogEntity.setBlogOwner(userId);
+            blogEntity.setBlogTitle(blogDto.getBlogTitle());
+            blogRepository.save(blogEntity);
 
-            String imageFileName = "post-" + postId;
+            String imageFileName = "post-" + blogId;
             String postCoverUrl = s3Url + imageFileName;
 
-            PostDynamoEntity postDynamoEntity = new PostDynamoEntity();
-            postDynamoEntity.setUserId(userId);
-            postDynamoEntity.setPostId(postId);
-            postDynamoEntity.setPostTitle(postDto.getPostTitle());
-            postDynamoEntity.setPostDescription(postDto.getPostDescription());
-            postDynamoEntity.setPostContent(postDto.getPostContent());
-            postDynamoEntity.setPostCover(postCoverUrl);
-            postDynamoEntity.setPostCreateDate(String.valueOf(new Timestamp(System.currentTimeMillis())));
-            postDynamoRepository.savePost(postDynamoEntity);
+            BlogDynamoEntity blogDynamoEntity = new BlogDynamoEntity();
+            blogDynamoEntity.setUserId(userId);
+            blogDynamoEntity.setBlogId(blogId);
+            blogDynamoEntity.setBlogTitle(blogDto.getBlogTitle());
+            blogDynamoEntity.setBlogDescription(blogDto.getBlogDescription());
+            blogDynamoEntity.setBlogContent(blogDto.getBlogContent());
+            blogDynamoEntity.setBlogCover(postCoverUrl);
+            blogDynamoEntity.setBlogCreateDate(String.valueOf(new Timestamp(System.currentTimeMillis())));
+            postDynamoRepository.savePost(blogDynamoEntity);
             awsS3Service.putImage(image, imageFileName);
 
-            return postDynamoRepository.getPostById(userId, postId);
+            return postDynamoRepository.getPostById(userId, blogId);
 
         }
         catch (Exception e) {
@@ -88,18 +89,7 @@ public class PostService {
     }
 
     //getPost
-    public PostDynamoEntity getPost(int postid, Authentication authentication) throws Exception {
-        try {
-            log.info("Start PostService.getpost() โวยยยยยยย");
-            Integer userId = userService.getUserId(jwtService.getUsername(authentication));
-            return  postDynamoRepository.getPostById(userId,postid);
 
-        }
-        catch(Exception e) {
-            log.info("Error PostService.getpost");
-            throw new Exception(HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
-        }
-    }
 
 
 

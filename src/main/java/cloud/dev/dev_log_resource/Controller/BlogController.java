@@ -2,11 +2,9 @@ package cloud.dev.dev_log_resource.Controller;
 
 import cloud.dev.dev_log_resource.Util.ResponseHelper;
 import cloud.dev.dev_log_resource.Util.ResponseModel;
-import cloud.dev.dev_log_resource.dto.PostDto;
-import cloud.dev.dev_log_resource.entity.PostDynamoEntity;
-import cloud.dev.dev_log_resource.service.PostService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import cloud.dev.dev_log_resource.dto.BlogDto;
+import cloud.dev.dev_log_resource.entity.BlogDynamoEntity;
+import cloud.dev.dev_log_resource.service.BlogService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,66 +16,104 @@ import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-
 @RestController
 @AllArgsConstructor
 @Slf4j
-@RequestMapping("/api/post")
-public class PostController {
+@RequestMapping("/api/blog")
+public class BlogController {
 
-    private final PostService postService;
+    private final BlogService blogService;
 
-    @PostMapping("/create-post")
-    public ResponseEntity<ResponseModel> createPost(@RequestParam("json") String json, @RequestParam("file") MultipartFile image, @CurrentSecurityContext(expression = "authentication") Authentication authentication) throws Exception, HttpException {
+    //Home page //get-blog
+    @GetMapping("/get-blog")
+    public ResponseEntity<ResponseModel> getHomePage(@RequestParam(required = false) String sort, //latest, popular, oldest
+                                                 @RequestParam(required = false) int limit,
+                                                     @RequestParam(required = false) int blog_id
+                                                 ) {
+        try {
+            log.info("Error BlogController.getHomePage()");
+            return null;
+        }
+        catch (Exception e){
+            log.info("Error BlogController.getHomePage()");
+        }
+
+        finally {
+            log.info("End BlogController.getHomePage()");
+        }
+        return null;
+    }
+
+
+    //Blog Editor
+    @PostMapping("/create-blog")
+    public ResponseEntity<ResponseModel> createPost(@RequestParam("json") String json,
+                                                    @RequestParam("file") MultipartFile image,
+                                                    @CurrentSecurityContext(expression = "authentication") Authentication authentication) throws Exception{
 
         try {
-            log.info("Start PostController.createPost()");
+            log.info("Start BlogController.createPost()");
 
             ObjectMapper objectMapper = new ObjectMapper();
-            PostDto postDto = objectMapper.readValue(json, PostDto.class);
-            PostDynamoEntity result = postService.create(postDto, image, authentication);
+            BlogDto blogDto = objectMapper.readValue(json, BlogDto.class);
+            BlogDynamoEntity result = blogService.createBlog(blogDto, image, authentication);
             return ResponseHelper.success(result);
 
         }
         catch (Exception e){
-            log.info("Error PostController.createPost()");
+            log.info("Error BlogController.createPost()");
             return ResponseHelper.badRequest(HttpStatus.BAD_REQUEST.toString(),e.getMessage());
         }
 
         finally {
-            log.info("End PostController.createPost()");
+            log.info("End BlogController.createPost()");
         }
     }
 
 
 
 
-
-    @GetMapping("/get-post")
-    public ResponseEntity<ResponseModel> getPost(@RequestParam int postId, @CurrentSecurityContext(expression = "authentication") Authentication authentication){
+    @PutMapping("/edit-blog")
+    public ResponseEntity<ResponseModel> editBlog(@RequestBody BlogDto blogDto,
+                                                  @CurrentSecurityContext(expression = "authentication") Authentication authentication) throws Exception{
         try {
-            log.info("Start PostController.Get Post()");
-            PostDynamoEntity result = postService.getPost(postId, authentication);
-            return ResponseHelper.success(result);
+            log.info("Start BlogController.editBlog()");
+
+            return ResponseHelper.success();
+
         }
-        catch(Exception e) {
-            log.info("Error PostController.Get-Post");
+        catch (Exception e){
+            log.info("Error BlogController.editBlog()");
             return ResponseHelper.badRequest(HttpStatus.BAD_REQUEST.toString(),e.getMessage());
         }
 
-    }
-
-
-
-
-
-
-    @PostMapping("/edit-post")
-    public ResponseEntity<ResponseModel> editPost(@RequestBody PostDto postDto, @CurrentSecurityContext(expression = "authentication") Authentication authentication){
-        return null;
+        finally {
+            log.info("End BlogController.editBlog()");
+        }
 
     }
+
+    @DeleteMapping("/delete-blog")
+    public ResponseEntity<ResponseModel> deleteBlog(@RequestParam BlogDto blogDto,
+                                                    @CurrentSecurityContext(expression = "authentication") Authentication authentication
+                                                    ) throws Exception{
+
+        try {
+            log.info("Start BlogController.deleteBlog()");
+
+            return ResponseHelper.success();
+
+        }
+        catch (Exception e){
+            log.info("Error BlogController.deleteBlog()");
+            return ResponseHelper.badRequest(HttpStatus.BAD_REQUEST.toString(),e.getMessage());
+        }
+
+        finally {
+            log.info("End BlogController.deleteBlog()");
+        }
+
+    }
+
 
 }

@@ -3,38 +3,33 @@ package cloud.dev.dev_log_resource.entity;
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import java.sql.Timestamp;
-
 @Data
-@DynamoDBTable(tableName = "post")
-public class PostDynamoEntity {
+@DynamoDBTable(tableName = "devlog_blog")
+public class BlogDynamoEntity {
 
     @DynamoDBHashKey(attributeName = "user_id")
     private Integer userId;
 
-    @DynamoDBRangeKey(attributeName = "post_id")
-    private Integer postId;
+    @DynamoDBRangeKey(attributeName = "blog_id")
+    private Integer blogId;
 
-    @DynamoDBAttribute(attributeName = "post_title")
-    private String postTitle;
+    @DynamoDBAttribute(attributeName = "blog_title")
+    private String blogTitle;
 
-    @DynamoDBAttribute(attributeName = "post_description")
-    private String postDescription;
+    @DynamoDBAttribute(attributeName = "blog_description")
+    private String blogDescription;
 
-    @DynamoDBAttribute(attributeName = "post_content")
-    private String postContent;
+    @DynamoDBAttribute(attributeName = "blog_content")
+    private String blogContent;
 
-    @DynamoDBAttribute(attributeName = "post_cover")
-    private String postCover;
+    @DynamoDBAttribute(attributeName = "blog_cover")
+    private String blogCover;
 
-    @DynamoDBAttribute(attributeName = "post_create_date")
-    private String postCreateDate;
+    @DynamoDBAttribute(attributeName = "blog_create_date")
+    private String blogCreateDate;
 
-    @DynamoDBAttribute(attributeName = "post_edit_date")
-    private String postEditDate;
+    @DynamoDBAttribute(attributeName = "blog_edit_date")
+    private String blogEditDate;
 
 
 
