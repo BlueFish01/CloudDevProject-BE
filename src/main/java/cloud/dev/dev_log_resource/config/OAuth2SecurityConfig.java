@@ -19,7 +19,12 @@ public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/**").authenticated()
+                .antMatchers("/api/user/**").authenticated()
+                .antMatchers("/api/blog/create-blog").authenticated()
+                .antMatchers("/api/blog/edit-blog").authenticated()
+                .antMatchers("/api/blog/delete-blog").authenticated()
+                .antMatchers("/api/blog/get-blog").permitAll()
+                .antMatchers("/api/blog/list-blog").permitAll()
                 .anyRequest().authenticated()
                 .and().oauth2ResourceServer().jwt();
     }

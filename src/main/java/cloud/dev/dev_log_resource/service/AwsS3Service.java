@@ -1,6 +1,7 @@
 package cloud.dev.dev_log_resource.service;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Objects;
 
 @Service
@@ -39,6 +39,20 @@ public class AwsS3Service {
         File imageFile = convertMultiPartToFile(imageMultipartFile);
 
         amazonS3.putObject(s3BucketName, imageFileName,  imageFile);
+    }
+
+
+    public void deleteObject(String objectName) throws Exception {
+        try {
+            log.info("Start AwsS3Service.deleteObject()");
+
+            amazonS3.deleteObject(new DeleteObjectRequest(s3BucketName, objectName));
+        } catch (Exception e) {
+            log.info("Error AwsS3Service.deleteObject()");
+            throw new Exception(HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
+        } finally {
+            log.info("End AwsS3Service.deleteObject()");
+        }
     }
 
 

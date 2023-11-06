@@ -16,7 +16,7 @@ public class JwtService {
 
     public String getUsername(Authentication authentication) throws Exception{
         try{
-            log.info("Error JwtService.getUsername()");
+            log.info("Start JwtService.getUsername()");
 
             if (authentication.isAuthenticated() && authentication.getPrincipal() instanceof Jwt jwt) {
 

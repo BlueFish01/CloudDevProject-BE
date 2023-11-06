@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PostDynamoRepository{
+public class BlogDynamoRepository {
 
     @Autowired
     private DynamoDBMapper dynamoDBMapper;
@@ -19,16 +19,11 @@ public class PostDynamoRepository{
         return dynamoDBMapper.load(BlogDynamoEntity.class, userId, postId);
     }
 
+    public void deleteBlogById(Integer postId, Integer userId) {
+        BlogDynamoEntity entity = dynamoDBMapper.load(BlogDynamoEntity.class, userId, postId);
+        if (entity != null) {
+            dynamoDBMapper.delete(entity);
+        }
+    }
+
 }
-
-
-//@EnableScan
-//public interface PostDynamoRepository extends CrudRepository<PostDynamoEntity, Integer> {
-//
-////    @Autowired
-////    private DynamoDBMapper dynamoDBMapper;
-////
-////    public void savePost(PostDynamoEntity postDynamoEntity) {
-////        dynamoDBMapper.save(postDynamoEntity);
-////    }
-//}
