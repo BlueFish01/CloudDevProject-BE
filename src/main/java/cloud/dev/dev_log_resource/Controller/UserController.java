@@ -4,6 +4,7 @@ import cloud.dev.dev_log_resource.Util.ResponseHelper;
 import cloud.dev.dev_log_resource.Util.ResponseModel;
 import cloud.dev.dev_log_resource.dto.BlogDto;
 import cloud.dev.dev_log_resource.dto.UserDto;
+import cloud.dev.dev_log_resource.entity.UserEntity;
 import cloud.dev.dev_log_resource.service.JwtService;
 import cloud.dev.dev_log_resource.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,10 +14,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -32,12 +35,24 @@ public class UserController {
 
     //Get Profile
     @GetMapping("/get-profile")
-    public ResponseEntity<ResponseModel> getProfile(@RequestParam int userId) {
+    public ResponseEntity<ResponseModel> getProfile(@RequestParam(required = false) String userId,
+                                                    @CurrentSecurityContext(expression = "authentication") Authentication authentication
+                                                    ) throws Exception {
         try {
             log.info("Start UserController.getProfile()");
 
-            return ResponseHelper.success();
+            UserEntity userEntity = new UserEntity();
 
+            if(userId == null){
+                userEntity = userService.getUserProfile(authentication);
+
+            }
+            else {
+                userEntity = userService.getUserProfileById(userId);
+
+            }
+
+            return ResponseHelper.success(userEntity);
 
         }
 
@@ -58,21 +73,18 @@ public class UserController {
 
 
     //Edit Profile
-    @PostMapping("/up-profile")
-    public ResponseEntity<ResponseModel> updateProfile(@RequestParam("file") MultipartFile image,
-                                                       @RequestParam("json") String json,
+    @PutMapping("/edit-profile")
+    public ResponseEntity<ResponseModel> editProfile(@RequestParam(value = "file", required = false) MultipartFile image,
+                                                       @RequestParam(value = "json", required = false) String json,
                                                        @CurrentSecurityContext(expression = "authentication") Authentication authentication) throws Exception {
         try {
             log.info("Start UserController.updateProfile()");
 
-
             ObjectMapper objectMapper = new ObjectMapper();
-            UserDto blogDto = objectMapper.readValue(json, UserDto.class);
+            UserDto userDto = objectMapper.readValue(json, UserDto.class);
+            UserEntity userEntity = userService.editProfile(userDto, image, authentication);
 
-
-            return ResponseHelper.success();
-
-
+            return ResponseHelper.success(userEntity);
         }
 
         catch (Exception e){

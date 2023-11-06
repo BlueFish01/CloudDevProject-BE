@@ -5,6 +5,7 @@ import cloud.dev.dev_log_resource.Util.ResponseModel;
 import cloud.dev.dev_log_resource.dto.BlogDto;
 import cloud.dev.dev_log_resource.entity.BlogDynamoEntity;
 import cloud.dev.dev_log_resource.service.BlogService;
+import com.amazonaws.services.xray.model.Http;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,8 @@ import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @Slf4j
@@ -25,23 +28,41 @@ public class BlogController {
     private final BlogService blogService;
 
     //Home page //get-blog
-    @GetMapping("/get-blog")
-    public ResponseEntity<ResponseModel> getHomePage(@RequestParam(required = false) String sort, //latest, popular, oldest
-                                                 @RequestParam(required = false) int limit,
-                                                     @RequestParam(required = false) int blog_id
+    @GetMapping("/blog-list")
+    public ResponseEntity<ResponseModel> getBlogList(@RequestParam String sort, //latest, popular, oldest
+                                                 @RequestParam int limit
                                                  ) {
         try {
             log.info("Error BlogController.getHomePage()");
-            return null;
+            List<BlogDto> listBlog = blogService.getBlogList(sort, limit);
+            return ResponseHelper.success(listBlog);
         }
         catch (Exception e){
             log.info("Error BlogController.getHomePage()");
+            return ResponseHelper.badRequest(HttpStatus.BAD_REQUEST.toString(), e.getMessage());
         }
 
         finally {
             log.info("End BlogController.getHomePage()");
         }
-        return null;
+    }
+
+
+    @GetMapping("/get-blog")
+    public ResponseEntity<ResponseModel> getBlogById(@RequestParam int blogId) {
+        try {
+            log.info("Error BlogController.getBlogById()");
+            BlogDto blog = blogService.getBlogById(blogId);
+            return ResponseHelper.success(blog);
+        }
+        catch (Exception e){
+            log.info("Error BlogController.getBlogById()");
+            return ResponseHelper.badRequest(HttpStatus.BAD_REQUEST.toString(), e.getMessage());
+        }
+
+        finally {
+            log.info("End BlogController.getBlogById()");
+        }
     }
 
 
@@ -56,7 +77,7 @@ public class BlogController {
 
             ObjectMapper objectMapper = new ObjectMapper();
             BlogDto blogDto = objectMapper.readValue(json, BlogDto.class);
-            BlogDynamoEntity result = blogService.createBlog(blogDto, image, authentication);
+            BlogDto result = blogService.createBlog(blogDto, image, authentication);
             return ResponseHelper.success(result);
 
         }
@@ -78,8 +99,8 @@ public class BlogController {
                                                   @CurrentSecurityContext(expression = "authentication") Authentication authentication) throws Exception{
         try {
             log.info("Start BlogController.editBlog()");
-
-            return ResponseHelper.success();
+            BlogDto result =  blogService.editBLog(blogDto, authentication);
+            return ResponseHelper.success(result);
 
         }
         catch (Exception e){
@@ -94,13 +115,13 @@ public class BlogController {
     }
 
     @DeleteMapping("/delete-blog")
-    public ResponseEntity<ResponseModel> deleteBlog(@RequestParam BlogDto blogDto,
+    public ResponseEntity<ResponseModel> deleteBlog(@RequestBody BlogDto blogDto,
                                                     @CurrentSecurityContext(expression = "authentication") Authentication authentication
                                                     ) throws Exception{
 
         try {
             log.info("Start BlogController.deleteBlog()");
-
+            blogService.deleteBlog(blogDto.getBlogId(), authentication);
             return ResponseHelper.success();
 
         }

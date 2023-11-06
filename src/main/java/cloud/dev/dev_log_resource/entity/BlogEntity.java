@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 public class BlogEntity {
     @Id
     @Column(name = "blog_id")
-    private Integer postId;
+    private Integer blogId;
 
     @Basic
     @Column(name = "blog_owner")
@@ -32,6 +32,7 @@ public class BlogEntity {
     @Basic
     @Column(name = "blog_edit_date", insertable = false)
     private Timestamp blogEditDate;
+
 
     @PrePersist
     public void prePersist() {
