@@ -35,22 +35,14 @@ public class UserController {
 
     //Get Profile
     @GetMapping("/get-profile")
-    public ResponseEntity<ResponseModel> getProfile(@RequestParam(required = false) String userId,
-                                                    @CurrentSecurityContext(expression = "authentication") Authentication authentication
+    public ResponseEntity<ResponseModel> getProfile(@CurrentSecurityContext(expression = "authentication") Authentication authentication
                                                     ) throws Exception {
         try {
             log.info("Start UserController.getProfile()");
 
             UserEntity userEntity = new UserEntity();
+            userEntity = userService.getUserProfile(authentication);
 
-            if(userId == null){
-                userEntity = userService.getUserProfile(authentication);
-
-            }
-            else {
-                userEntity = userService.getUserProfileById(userId);
-
-            }
 
             return ResponseHelper.success(userEntity);
 
@@ -68,6 +60,41 @@ public class UserController {
 
 
 
+    @GetMapping("/get-profile-by-id")
+    public ResponseEntity<ResponseModel> getProfileById(@RequestParam(required = false) String userId) throws Exception {
+        try {
+            log.info("Start UserController.getProfileById()");
+
+            UserEntity userEntity = new UserEntity();
+
+            userEntity = userService.getUserProfileById(userId);
+
+
+            return ResponseHelper.success(userEntity);
+
+        }
+
+        catch (Exception e){
+            log.info("Error UserController.getProfileById()");
+            return ResponseHelper.badRequest(HttpStatus.BAD_REQUEST.toString(),e.getMessage());
+        }
+
+        finally {
+            log.info("End UserController.getProfileById()");
+        }
+    }
+
+
+
+
+
+
+
+    //Edit Profile
+
+
+
+
 
 
 
@@ -80,9 +107,22 @@ public class UserController {
         try {
             log.info("Start UserController.updateProfile()");
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            UserDto userDto = objectMapper.readValue(json, UserDto.class);
-            UserEntity userEntity = userService.editProfile(userDto, image, authentication);
+            if(json != null){
+                ObjectMapper objectMapper = new ObjectMapper();
+                UserDto userDto = objectMapper.readValue(json, UserDto.class);
+                userService.editProfileContent(userDto, authentication);
+            }
+
+            if(image != null)
+            {
+               userService.updateProfileImage(image, authentication);
+            }
+
+            UserEntity userEntity = new UserEntity();
+            userEntity = userService.getUserProfile(authentication);
+
+
+
 
             return ResponseHelper.success(userEntity);
         }

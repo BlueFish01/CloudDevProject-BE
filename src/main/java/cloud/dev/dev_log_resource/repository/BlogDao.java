@@ -24,7 +24,7 @@ public class BlogDao {
         return namedParameterJdbcTemplate.query(sql.toString(), new BeanPropertyRowMapper(BlogDto.class));
     }
 
-    public List<BlogDto> getBlogByLatest(int limit) {
+    public List<BlogDto> getBlogByLatest(int limit, Integer userId) {
         StringBuffer sql = new StringBuffer();
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         sql.append("SELECT ");
@@ -35,6 +35,11 @@ public class BlogDao {
         sql.append("blog_create_date ");
         sql.append("FROM ");
         sql.append("BLOG ");
+        if (userId != null){
+            sql.append("WHERE ");
+            sql.append(" blog_owner = :userId ");
+            parameters.addValue("userId", userId);
+        }
         sql.append("ORDER BY blog_create_date DESC");
         if (limit > 0){
             sql.append(" LIMIT :limit");
@@ -43,7 +48,7 @@ public class BlogDao {
         return namedParameterJdbcTemplate.query(sql.toString(),parameters, new BeanPropertyRowMapper(BlogDto.class));
     }
 
-    public List<BlogDto> getBlogByPopular(int limit) {
+    public List<BlogDto> getBlogByPopular(int limit, Integer userId) {
         StringBuffer sql = new StringBuffer();
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         sql.append("SELECT ");
@@ -54,6 +59,11 @@ public class BlogDao {
         sql.append("blog_create_date ");
         sql.append("FROM ");
         sql.append("BLOG ");
+        if (userId != null){
+            sql.append("WHERE ");
+            sql.append(" blog_owner = :userId ");
+            parameters.addValue("userId", userId);
+        }
         sql.append("ORDER BY blog_view DESC");
         if (limit > 0){
             sql.append(" LIMIT :limit");
@@ -63,7 +73,7 @@ public class BlogDao {
 
     }
 
-    public List<BlogDto> getBlogByOldest(int limit) {
+    public List<BlogDto> getBlogByOldest(int limit, Integer userId) {
         StringBuffer sql = new StringBuffer();
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         sql.append("SELECT ");
@@ -74,6 +84,11 @@ public class BlogDao {
         sql.append("blog_create_date ");
         sql.append("FROM ");
         sql.append("BLOG ");
+        if (userId != null){
+            sql.append("WHERE ");
+            sql.append(" blog_owner = :userId ");
+            parameters.addValue("userId", userId);
+        }
         sql.append("ORDER BY blog_create_date ASC");
         if (limit > 0){
             sql.append(" LIMIT :limit");

@@ -119,10 +119,10 @@ public class UserService {
 
     }
 
-    public UserEntity editProfile(UserDto userDto, MultipartFile image, Authentication authentication) throws Exception{
+    public void editProfileContent(UserDto userDto, Authentication authentication) throws Exception{
 
         try {
-            log.info("Start UserService.editProfile()");
+            log.info("Start UserService.editProfileContent()");
             String cUid = jwtService.getUsername(authentication);
 
             UserEntity userEntity = userRepository.findByCUid(cUid);
@@ -142,27 +142,47 @@ public class UserService {
                 userEntity.setUserAbout(userDto.getUserAbout());
             }
 
-            if(userDto.getDeleteImage().equals("True")){
-                userEntity.setUserPicture(null);
+
+            if(userDto.getDeleteImage() != null){
+                if(userDto.getDeleteImage().equals("True")) {
+                    userEntity.setUserPicture(null);
+                }
+
             }
-
-            else {
-                String imageFileName = "user-profile-" + getUserId(cUid);
-                String profileUrl = s3Url + imageFileName;
-                userEntity.setUserPicture(profileUrl);
-                awsS3Service.putImage(image, imageFileName);
-            }
-
-            return userRepository.save(userEntity);
-
 
         }
         catch(Exception e){
-            log.info("Error UserService.editProfile()");
+            log.info("Error UserService.editProfileContent()");
             throw new Exception(HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
         }
         finally {
-            log.info("End UserService.editProfile()");
+            log.info("End UserService.editProfileContent()");
         }
+    }
+
+    public  void updateProfileImage(MultipartFile image, Authentication authentication) throws Exception{
+
+
+        try{
+            log.info("Start UserService.updateProfileImage()");
+
+            String cUid = jwtService.getUsername(authentication);
+            UserEntity userEntity = userRepository.findByCUid(cUid);
+
+            String imageFileName = "user-profile-" + getUserId(cUid);
+            String profileUrl = s3Url + imageFileName;
+            userEntity.setUserPicture(profileUrl);
+            awsS3Service.putImage(image, imageFileName);
+
+        }
+
+        catch(Exception e){
+            log.info("Error UserService.updateProfileImage()");
+            throw new Exception(HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
+        }
+        finally {
+            log.info("End UserService.updateProfileImage()");
+        }
+
     }
 }

@@ -19,7 +19,8 @@ public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/user/**").authenticated()
+                .antMatchers("/api/user/get-profile").authenticated()
+                .antMatchers("/api/user/get-profile-by-id").permitAll()
                 .antMatchers("/api/blog/create-blog").authenticated()
                 .antMatchers("/api/blog/edit-blog").authenticated()
                 .antMatchers("/api/blog/delete-blog").authenticated()

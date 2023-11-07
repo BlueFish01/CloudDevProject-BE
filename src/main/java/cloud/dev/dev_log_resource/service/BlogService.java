@@ -179,17 +179,18 @@ public class BlogService {
 
     }
 
-    public List<BlogDto> getBlogList(String sort, int limit) throws Exception {
+    public List<BlogDto> getBlogList(String sort, int limit, Authentication authentication) throws Exception {
         try {
             log.info("Start BlogService.getBlogList()");
             List<BlogDto> bloglist = new ArrayList<>();
+            Integer userId = userService.getUserId(jwtService.getUsername(authentication));
             //sort = latest
             if (sort.equals("latest")) {
-                bloglist = blogDao.getBlogByLatest(limit);
+                bloglist = blogDao.getBlogByLatest(limit, userId);
             } else if (sort.equals("popular")) {
-                bloglist = blogDao.getBlogByPopular(limit);
+                bloglist = blogDao.getBlogByPopular(limit, userId);
             } else if (sort.equals("oldest")) {
-                bloglist = blogDao.getBlogByOldest(limit);
+                bloglist = blogDao.getBlogByOldest(limit, userId);
             }
 
             for(BlogDto blog : bloglist) {

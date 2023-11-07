@@ -30,11 +30,12 @@ public class BlogController {
     //Home page //get-blog
     @GetMapping("/blog-list")
     public ResponseEntity<ResponseModel> getBlogList(@RequestParam String sort, //latest, popular, oldest
-                                                 @RequestParam int limit
-                                                 ) {
+                                                     @RequestParam int limit,
+                                                     @CurrentSecurityContext(expression = "authentication") Authentication authentication
+                                                 )throws Exception {
         try {
             log.info("Error BlogController.getHomePage()");
-            List<BlogDto> listBlog = blogService.getBlogList(sort, limit);
+            List<BlogDto> listBlog = blogService.getBlogList(sort, limit, authentication);
             return ResponseHelper.success(listBlog);
         }
         catch (Exception e){
