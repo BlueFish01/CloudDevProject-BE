@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ea25ec1-ba83-403a-97c5-8bf655f2b7e3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/BlogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/config/OAuth2SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/config/OAuth2SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/BlogDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/BlogDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/BlogDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/BlogDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/BlogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-    </list>
+    <list default="true" id="5ea25ec1-ba83-403a-97c5-8bf655f2b7e3" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

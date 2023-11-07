@@ -25,7 +25,7 @@ public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/blog/edit-blog").authenticated()
                 .antMatchers("/api/blog/delete-blog").authenticated()
                 .antMatchers("/api/blog/get-blog").permitAll()
-                .antMatchers("/api/blog/list-blog").permitAll()
+                .antMatchers("/api/blog/list-blog").authenticated()
                 .anyRequest().authenticated()
                 .and().oauth2ResourceServer().jwt();
     }
