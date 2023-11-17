@@ -53,4 +53,9 @@ public class UserEntity {
     @Basic
     @Column(name = "user_status")
     private String userStatus;
+
+    @Basic
+    @Column(name = "user_address")
+    private String userAddress;
+
 }

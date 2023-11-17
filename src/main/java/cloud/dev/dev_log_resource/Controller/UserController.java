@@ -2,10 +2,7 @@ package cloud.dev.dev_log_resource.Controller;
 
 import cloud.dev.dev_log_resource.Util.ResponseHelper;
 import cloud.dev.dev_log_resource.Util.ResponseModel;
-import cloud.dev.dev_log_resource.dto.BlogDto;
 import cloud.dev.dev_log_resource.dto.UserDto;
-import cloud.dev.dev_log_resource.entity.UserEntity;
-import cloud.dev.dev_log_resource.service.JwtService;
 import cloud.dev.dev_log_resource.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -14,12 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -28,8 +21,6 @@ public class UserController {
 
     @Autowired
     UserService userService;
-    @Autowired
-    JwtService jwtService;
 
 
 
@@ -40,11 +31,10 @@ public class UserController {
         try {
             log.info("Start UserController.getProfile()");
 
-            UserEntity userEntity = new UserEntity();
-            userEntity = userService.getUserProfile(authentication);
+            UserDto userDto = userService.getUserProfile(authentication);
 
 
-            return ResponseHelper.success(userEntity);
+            return ResponseHelper.success(userDto);
 
         }
 
@@ -65,12 +55,11 @@ public class UserController {
         try {
             log.info("Start UserController.getProfileById()");
 
-            UserEntity userEntity = new UserEntity();
 
-            userEntity = userService.getUserProfileById(userId);
+            UserDto userDto = userService.getUserProfileById(userId);
 
 
-            return ResponseHelper.success(userEntity);
+            return ResponseHelper.success(userDto);
 
         }
 
@@ -118,13 +107,12 @@ public class UserController {
                userService.updateProfileImage(image, authentication);
             }
 
-            UserEntity userEntity = new UserEntity();
-            userEntity = userService.getUserProfile(authentication);
+            UserDto userDto = userService.getUserProfile(authentication);
 
 
 
 
-            return ResponseHelper.success(userEntity);
+            return ResponseHelper.success(userDto);
         }
 
         catch (Exception e){

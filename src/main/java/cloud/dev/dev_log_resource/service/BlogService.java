@@ -3,9 +3,13 @@ package cloud.dev.dev_log_resource.service;
 import cloud.dev.dev_log_resource.dto.BlogDto;
 import cloud.dev.dev_log_resource.entity.BlogDynamoEntity;
 import cloud.dev.dev_log_resource.entity.BlogEntity;
+import cloud.dev.dev_log_resource.entity.UserEntity;
 import cloud.dev.dev_log_resource.repository.BlogDao;
 import cloud.dev.dev_log_resource.repository.BlogDynamoRepository;
 import cloud.dev.dev_log_resource.repository.BlogRepository;
+import cloud.dev.dev_log_resource.repository.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,6 +40,9 @@ public class BlogService {
     @Autowired
     AwsS3Service awsS3Service;
 
+    @Autowired
+    UserRepository userRepository;
+
     @Value("${spring.amazon.aws.s3Url}")
     private String s3Url;
 
@@ -45,8 +52,10 @@ public class BlogService {
 
             int blogId;
             Integer userId = userService.getUserId(jwtService.getUsername(authentication));
-
+            UserEntity userEntity = userRepository.findByCUid(jwtService.getUsername(authentication));
             List<BlogDto> lastId = blogDao.getLastID();
+
+
             try{
                 lastId.get(0).getBlogId();
                 blogId = lastId.get(0).getBlogId() + 1;
@@ -65,13 +74,15 @@ public class BlogService {
 
             String imageFileName = "PostCover-" + blogId;
             String postCoverUrl = s3Url + imageFileName;
-
+            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            String blogContentJsonString = ow.writeValueAsString(blogDto.getBlogContent());
             BlogDynamoEntity blogDynamoEntity = new BlogDynamoEntity();
             blogDynamoEntity.setUserId(userId);
+            blogDynamoEntity.setOwner_username(userEntity.getUsername());
             blogDynamoEntity.setBlogId(blogId);
             blogDynamoEntity.setBlogTitle(blogDto.getBlogTitle());
             blogDynamoEntity.setBlogDescription(blogDto.getBlogDescription());
-            blogDynamoEntity.setBlogContent(blogDto.getBlogContent());
+            blogDynamoEntity.setBlogContent(blogContentJsonString);
             blogDynamoEntity.setBlogCover(postCoverUrl);
             blogDynamoEntity.setBlogCreateDate(String.valueOf(new Timestamp(System.currentTimeMillis())));
             blogDynamoRepository.savePost(blogDynamoEntity);
@@ -81,6 +92,7 @@ public class BlogService {
             BlogEntity blog = blogRepository.getReferenceById(blogId);
             BlogDto result = new BlogDto();
             result.setBlogId(blogId);
+            result.setOwnerUserName(dynamo.getOwner_username());
             result.setBlogTitle(blog.getBlogTitle());
             result.setBlogDescription(dynamo.getBlogDescription());
             result.setBlogCover(dynamo.getBlogCover());
@@ -90,9 +102,8 @@ public class BlogService {
             if(blog.getBlogEditDate() != null){
                 result.setBlogEditDate(blog.getBlogEditDate().toString());
             }
-
-
-
+            result.setOwnerId(dynamo.getUserId());
+            result.setOwnerUserName(userEntity.getUsername());
 
             return result;
 
@@ -125,7 +136,9 @@ public class BlogService {
             }
 
             if(blogDto.getBlogContent() != null){
-                blogDynamoEntity.setBlogContent(blogDto.getBlogContent());
+                ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+                String blogContentJsonString = ow.writeValueAsString(blogDto.getBlogContent());
+                blogDynamoEntity.setBlogContent(blogContentJsonString);
             }
 
             blogDynamoEntity.setBlogEditDate(String.valueOf(new Timestamp(System.currentTimeMillis())));
@@ -136,6 +149,7 @@ public class BlogService {
             BlogDynamoEntity dynamo = blogDynamoRepository.getPostById(userId, blogDto.getBlogId());
             BlogDto result = new BlogDto();
             result.setBlogId(blog.getBlogId());
+            result.setOwnerUserName(dynamo.getOwner_username());
             result.setBlogTitle(blog.getBlogTitle());
             result.setBlogCover(dynamo.getBlogCover());
             result.setBlogDescription(dynamo.getBlogDescription());
@@ -197,6 +211,8 @@ public class BlogService {
                 BlogDynamoEntity blogDynamoEntity = blogDynamoRepository.getPostById(blog.getOwnerId(),blog.getBlogId());
                 blog.setBlogCover(blogDynamoEntity.getBlogCover());
                 blog.setBlogDescription(blogDynamoEntity.getBlogDescription());
+                blog.setOwnerUserName(blogDynamoEntity.getOwner_username());
+                blog.setBlogContent(blogDynamoEntity.getBlogContent());
             }
 
             return bloglist;

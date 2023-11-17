@@ -4,11 +4,15 @@ import lombok.Data;
 
 @Data
 public class UserDto {
+    private int user_id;
     private String deleteImage;
     private String username;
     private String userFName;
     private String userLName;
     private String userEmail;
     private String userSocial;
+    private String userPicture;
     private String userAbout;
+    private String userAddress;
+    private int numberOfPost;
 }

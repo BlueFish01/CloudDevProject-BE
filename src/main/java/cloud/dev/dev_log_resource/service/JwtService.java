@@ -1,6 +1,5 @@
 package cloud.dev.dev_log_resource.service;
 
-import cloud.dev.dev_log_resource.entity.BlogDynamoEntity;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,12 +20,10 @@ public class JwtService {
             if (authentication.isAuthenticated() && authentication.getPrincipal() instanceof Jwt jwt) {
 
                 // Get the username from the JWT claims
-                String username = jwt.getClaim("sub");
-                BlogDynamoEntity test = new BlogDynamoEntity();
                 // You can also access other claims as needed
                 // For example, if the username claim is stored under a different key, replace "sub" with the correct claim key.
 
-                return username;
+                return jwt.getClaim("sub");
             }
             else {
                 return null;

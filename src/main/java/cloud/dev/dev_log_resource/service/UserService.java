@@ -2,19 +2,15 @@ package cloud.dev.dev_log_resource.service;
 
 import cloud.dev.dev_log_resource.dto.UserDto;
 import cloud.dev.dev_log_resource.entity.UserEntity;
+import cloud.dev.dev_log_resource.repository.UserDao;
 import cloud.dev.dev_log_resource.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -27,6 +23,9 @@ public class UserService {
 
     @Autowired
     JwtService jwtService;
+
+    @Autowired
+    UserDao userDao;
 
     @Value("${spring.amazon.aws.s3Url}")
     private String s3Url;
@@ -77,15 +76,29 @@ public class UserService {
 //
 //    }
 
-    public UserEntity getUserProfile(Authentication authentication) throws Exception{
+    public UserDto getUserProfile(Authentication authentication) throws Exception{
 
-        String cUid = jwtService.getUsername(authentication);
+
         try {
             log.info("Start UserService.getUserProfile()");
 
+            String cUid = jwtService.getUsername(authentication);
             UserEntity userEntity = userRepository.findByCUid(cUid);
+            int blogCount = userDao.getBlogCount(getUserId(cUid)).get(0).getNumberOfPost();
 
-            return  userEntity;
+            UserDto result = new UserDto();
+            result.setUser_id(userEntity.getUserId());
+            result.setUsername(userEntity.getUsername());
+            result.setUserFName(userEntity.getUserFname());
+            result.setUserLName(userEntity.getUserLname());
+            result.setUserEmail(userEntity.getUserEmail());
+            result.setUserAbout(userEntity.getUserAbout());
+            result.setUserSocial(userEntity.getUserSocial());
+            result.setUserPicture(userEntity.getUserPicture());
+            result.setNumberOfPost(blogCount);
+
+
+            return  result;
         }
         catch(Exception e){
             log.info("Error UserService.getUserProfile()");
@@ -99,14 +112,25 @@ public class UserService {
     }
 
 
-    public UserEntity getUserProfileById(String userId) throws Exception{
+    public UserDto getUserProfileById(String userId) throws Exception{
 
         try {
             log.info("Start UserService.getUserProfile()");
 
             UserEntity userEntity = userRepository.findById(Integer.valueOf(userId)).get();
+            UserDto result = new UserDto();
+            int blogCount = userDao.getBlogCount(Integer.parseInt(userId)).get(0).getNumberOfPost();
+            result.setUser_id(userEntity.getUserId());
+            result.setUsername(userEntity.getUsername());
+            result.setUserFName(userEntity.getUserFname());
+            result.setUserLName(userEntity.getUserLname());
+            result.setUserEmail(userEntity.getUserEmail());
+            result.setUserAbout(userEntity.getUserAbout());
+            result.setUserSocial(userEntity.getUserSocial());
+            result.setUserPicture(userEntity.getUserPicture());
+            result.setNumberOfPost(blogCount);
 
-            return  userEntity;
+            return  result;
         }
         catch(Exception e){
             log.info("Error UserService.getUserProfile()");
@@ -148,6 +172,10 @@ public class UserService {
                     userEntity.setUserPicture(null);
                 }
 
+            }
+
+            if(userDto.getUserAddress() != null){
+                userEntity.setUserAddress(userDto.getUserAddress());
             }
 
         }

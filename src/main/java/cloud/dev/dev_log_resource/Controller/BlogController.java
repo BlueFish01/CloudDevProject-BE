@@ -3,13 +3,10 @@ package cloud.dev.dev_log_resource.Controller;
 import cloud.dev.dev_log_resource.Util.ResponseHelper;
 import cloud.dev.dev_log_resource.Util.ResponseModel;
 import cloud.dev.dev_log_resource.dto.BlogDto;
-import cloud.dev.dev_log_resource.entity.BlogDynamoEntity;
 import cloud.dev.dev_log_resource.service.BlogService;
-import com.amazonaws.services.xray.model.Http;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -27,7 +24,7 @@ public class BlogController {
 
     private final BlogService blogService;
 
-    //Home page //get-blog
+    //Homepage get-blog
     @GetMapping("/blog-list")
     public ResponseEntity<ResponseModel> getBlogList(@RequestParam String sort, //latest, popular, oldest
                                                      @RequestParam int limit,
@@ -78,6 +75,7 @@ public class BlogController {
 
             ObjectMapper objectMapper = new ObjectMapper();
             BlogDto blogDto = objectMapper.readValue(json, BlogDto.class);
+            System.out.print(blogDto.getBlogContent());
             BlogDto result = blogService.createBlog(blogDto, image, authentication);
             return ResponseHelper.success(result);
 

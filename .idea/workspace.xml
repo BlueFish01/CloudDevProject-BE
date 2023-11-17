@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ea25ec1-ba83-403a-97c5-8bf655f2b7e3" name="Changes" comment="" />
+    <list default="true" id="5ea25ec1-ba83-403a-97c5-8bf655f2b7e3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/BlogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/BlogDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/BlogDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/BlogDynamoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/BlogDynamoEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/BlogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,16 +60,30 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;pooh&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/pattarapol/Documents/Cloud_Proj/CloudDevProject-BE/src/main/resources&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="DevLogResourceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="BUCKET_NAME" value="devlogresource" />
+        <env name="DB_PASSWORD" value="devlogpassword" />
+        <env name="DB_URL" value="jdbc:mysql://devlog.cwmrubevoikp.us-east-1.rds.amazonaws.com:3306/devlog" />
+        <env name="DB_USER" value="admin" />
+        <env name="ACCESS_KEY" value="ASIATKFXOLMBVW5Q7LBQ" />
+        <env name="SECRET_KEY" value="bltXLqhx0uR6XQZLRbi9ZNuFBZGUaMrpJ1JmHMUD" />
+        <env name="SESSION_TOKEN" value="FwoGZXIvYXdzEFUaDLFF+0ssJbxtiqYYyiLGAQCcyrTFi3h3hNdpjG9rfcaKOA13lTBZgS31oquwC4BJ2EGL6jfVq8d+02INqHJ5yedkUjClAUev0uVAdmZqcqVTBTrlHa0XfT62jTc95dVH8oAxFwUJH7SQqg2VWCiwtYVRYiXp8dGWy38ESv6+rTfeW42ep7ONvAIcFPqIMmBCrSZYjCU+FSzoEX/K5z8dEBGM4CzuSsNPIVDDZP9/dMl5uuec1B1rrABuce8ypVG08x6TuW/cUcD0O0foNp89q/RE208WESjb8teqBjItG4rTpaF+Ubus0zUsmOjsoEyBWp8b6YwmZhPn9Acymkxoungg9afGkOHKHLLH" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="cloud.dev.dev_log_resource.DevLogResourceApplication" />
       <module name="dev_log_resource" />
       <extension name="coverage">
@@ -63,6 +91,11 @@
           <option name="PATTERN" value="cloud.dev.dev_log_resource.*" />
           <option name="ENABLED" value="true" />
         </pattern>
+      </extension>
+      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
       </extension>
       <method v="2">
         <option name="Make" enabled="true" />
@@ -97,6 +130,9 @@
       <updated>1698466401877</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
