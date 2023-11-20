@@ -2,6 +2,8 @@ package cloud.dev.dev_log_resource.dto;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+
 @Data
 public class UserDto {
     private int user_id;
@@ -10,7 +12,7 @@ public class UserDto {
     private String userFName;
     private String userLName;
     private String userEmail;
-    private String userSocial;
+    private String[] userSocial;
     private String userPicture;
     private String userAbout;
     private String userAddress;

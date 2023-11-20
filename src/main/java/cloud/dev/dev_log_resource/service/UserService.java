@@ -12,6 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 @Service
 @Slf4j
 public class UserService {
@@ -93,8 +96,9 @@ public class UserService {
             result.setUserLName(userEntity.getUserLname());
             result.setUserEmail(userEntity.getUserEmail());
             result.setUserAbout(userEntity.getUserAbout());
-            result.setUserSocial(userEntity.getUserSocial());
+            result.setUserSocial(socialToList(userEntity.getUserSocial()));
             result.setUserPicture(userEntity.getUserPicture());
+            result.setUserAddress(userEntity.getUserAddress());
             result.setNumberOfPost(blogCount);
 
 
@@ -126,8 +130,9 @@ public class UserService {
             result.setUserLName(userEntity.getUserLname());
             result.setUserEmail(userEntity.getUserEmail());
             result.setUserAbout(userEntity.getUserAbout());
-            result.setUserSocial(userEntity.getUserSocial());
+            result.setUserSocial(socialToList(userEntity.getUserSocial()));
             result.setUserPicture(userEntity.getUserPicture());
+            result.setUserAddress(userEntity.getUserAddress());
             result.setNumberOfPost(blogCount);
 
             return  result;
@@ -159,7 +164,7 @@ public class UserService {
             }
 
             if(userDto.getUserSocial() != null){
-                userEntity.setUserSocial(userDto.getUserSocial());
+                userEntity.setUserSocial(Arrays.toString(userDto.getUserSocial()));
             }
 
             if(userDto.getUserAbout() != null){
@@ -173,10 +178,11 @@ public class UserService {
                 }
 
             }
-
             if(userDto.getUserAddress() != null){
                 userEntity.setUserAddress(userDto.getUserAddress());
             }
+
+            userRepository.save(userEntity);
 
         }
         catch(Exception e){
@@ -212,5 +218,11 @@ public class UserService {
             log.info("End UserService.updateProfileImage()");
         }
 
+    }
+
+
+    private String[] socialToList(String socialString){
+        String trimString = socialString.replaceAll("^\\[|]$", "");
+        return trimString.split(",");
     }
 }

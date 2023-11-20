@@ -6,18 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5ea25ec1-ba83-403a-97c5-8bf655f2b7e3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/BlogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/BlogDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/BlogDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/BlogDynamoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/BlogDynamoEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/BlogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/JwtService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,13 +68,13 @@
   <component name="RunManager">
     <configuration name="DevLogResourceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
+        <env name="ACCESS_KEY" value="ASIATKFXOLMBZCMOVYUQ" />
         <env name="BUCKET_NAME" value="devlogresource" />
         <env name="DB_PASSWORD" value="devlogpassword" />
         <env name="DB_URL" value="jdbc:mysql://devlog.cwmrubevoikp.us-east-1.rds.amazonaws.com:3306/devlog" />
         <env name="DB_USER" value="admin" />
-        <env name="ACCESS_KEY" value="ASIATKFXOLMBVW5Q7LBQ" />
-        <env name="SECRET_KEY" value="bltXLqhx0uR6XQZLRbi9ZNuFBZGUaMrpJ1JmHMUD" />
-        <env name="SESSION_TOKEN" value="FwoGZXIvYXdzEFUaDLFF+0ssJbxtiqYYyiLGAQCcyrTFi3h3hNdpjG9rfcaKOA13lTBZgS31oquwC4BJ2EGL6jfVq8d+02INqHJ5yedkUjClAUev0uVAdmZqcqVTBTrlHa0XfT62jTc95dVH8oAxFwUJH7SQqg2VWCiwtYVRYiXp8dGWy38ESv6+rTfeW42ep7ONvAIcFPqIMmBCrSZYjCU+FSzoEX/K5z8dEBGM4CzuSsNPIVDDZP9/dMl5uuec1B1rrABuce8ypVG08x6TuW/cUcD0O0foNp89q/RE208WESjb8teqBjItG4rTpaF+Ubus0zUsmOjsoEyBWp8b6YwmZhPn9Acymkxoungg9afGkOHKHLLH" />
+        <env name="SECRET_KEY" value="KNXth0bU6Fqk2rXu2W/M9PSNkosIBjuUkeeth2re" />
+        <env name="SESSION_TOKEN" value="FwoGZXIvYXdzEKn//////////wEaDCDzCEWRPf7DfE8aiyLGAVQzCK5+GXvNGj6ibJM0zpXMyy3Kz0jEV/LZohrTQN8FmVtW3hJnf7wgENZxcy65kq8PFfVkRjH5vcSJMe5KcQPfezWmk34otCF/o2GsovI7cg4BnNPAq2BU+5HBB8rid9e1ua17lIOUG1M1ss8bukwMPaM4kDb6MpAG3MqnWzNClnm5pfbcDw5sdx6r/WKVlQmpyHlcEpy4Sak7wHa1uJyDXtoSDMd02CDhTUHodJDENLkKjr5UCkXhdY4I2rXL2ciS/o3FmSjPwOqqBjIt7EJoagZPd7obD/PLUl/cllKAoaZRlaon2xYl8lQ9qRDL+ofcmCaGzye7IPd0" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="cloud.dev.dev_log_resource.DevLogResourceApplication" />
       <module name="dev_log_resource" />

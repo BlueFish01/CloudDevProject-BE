@@ -179,7 +179,7 @@ public class BlogService {
             Integer userId = userService.getUserId(jwtService.getUsername(authentication));
             blogRepository.deleteById(blogId);
             blogDynamoRepository.deleteBlogById(blogId, userId);
-            awsS3Service.deleteObject("PostCCover-" + blogId);
+            awsS3Service.deleteObject("PostCover-" + blogId);
 
         }
         catch (Exception e) {
@@ -246,6 +246,7 @@ public class BlogService {
             blogDto.setBlogView(blogEntity.getBlogView());
             blogDto.setBlogCreateDate(blogDynamoEntity.getBlogCreateDate());
             blogDto.setBlogEditDate(blogDynamoEntity.getBlogEditDate());
+            blogDto.setOwnerUserName(blogDynamoEntity.getOwner_username());
 
             return blogDto;
 
