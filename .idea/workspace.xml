@@ -5,23 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ea25ec1-ba83-403a-97c5-8bf655f2b7e3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/BlogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/config/OAuth2SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/config/OAuth2SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/BlogDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/BlogDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/BlogEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/BlogEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/BlogDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/BlogDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/BlogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/BlogRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/PostDynamoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/BlogDynamoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/AwsS3Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/AwsS3Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/entity/UserEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/BlogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/JwtService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cloud/dev/dev_log_resource/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,22 +46,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "pooh",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;pooh&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/pattarapol/Documents/Cloud_Proj/CloudDevProject-BE/src/main/resources&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="DevLogResourceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="ACCESS_KEY" value="ASIATKFXOLMBZCMOVYUQ" />
+        <env name="BUCKET_NAME" value="devlogresource" />
+        <env name="DB_PASSWORD" value="devlogpassword" />
+        <env name="DB_URL" value="jdbc:mysql://devlog.cwmrubevoikp.us-east-1.rds.amazonaws.com:3306/devlog" />
+        <env name="DB_USER" value="admin" />
+        <env name="SECRET_KEY" value="KNXth0bU6Fqk2rXu2W/M9PSNkosIBjuUkeeth2re" />
+        <env name="SESSION_TOKEN" value="FwoGZXIvYXdzEKn//////////wEaDCDzCEWRPf7DfE8aiyLGAVQzCK5+GXvNGj6ibJM0zpXMyy3Kz0jEV/LZohrTQN8FmVtW3hJnf7wgENZxcy65kq8PFfVkRjH5vcSJMe5KcQPfezWmk34otCF/o2GsovI7cg4BnNPAq2BU+5HBB8rid9e1ua17lIOUG1M1ss8bukwMPaM4kDb6MpAG3MqnWzNClnm5pfbcDw5sdx6r/WKVlQmpyHlcEpy4Sak7wHa1uJyDXtoSDMd02CDhTUHodJDENLkKjr5UCkXhdY4I2rXL2ciS/o3FmSjPwOqqBjIt7EJoagZPd7obD/PLUl/cllKAoaZRlaon2xYl8lQ9qRDL+ofcmCaGzye7IPd0" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="cloud.dev.dev_log_resource.DevLogResourceApplication" />
       <module name="dev_log_resource" />
       <extension name="coverage">
@@ -81,6 +83,11 @@
           <option name="PATTERN" value="cloud.dev.dev_log_resource.*" />
           <option name="ENABLED" value="true" />
         </pattern>
+      </extension>
+      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
       </extension>
       <method v="2">
         <option name="Make" enabled="true" />
@@ -115,6 +122,9 @@
       <updated>1698466401877</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

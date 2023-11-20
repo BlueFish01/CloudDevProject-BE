@@ -6,11 +6,14 @@ import lombok.Data;
 public class BlogDto {
     private Integer blogId;
     private Integer ownerId;
+    private String ownerUserName;
     private String blogTitle;
     private String blogCover;
     private String blogDescription;
-    private String blogContent;
+    private Object blogContent;
     private Integer blogView;
     private String blogCreateDate;
     private String blogEditDate;
 }
+
+

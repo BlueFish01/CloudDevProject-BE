@@ -2,10 +2,7 @@ package cloud.dev.dev_log_resource.Controller;
 
 import cloud.dev.dev_log_resource.Util.ResponseHelper;
 import cloud.dev.dev_log_resource.Util.ResponseModel;
-import cloud.dev.dev_log_resource.dto.BlogDto;
 import cloud.dev.dev_log_resource.dto.UserDto;
-import cloud.dev.dev_log_resource.entity.UserEntity;
-import cloud.dev.dev_log_resource.service.JwtService;
 import cloud.dev.dev_log_resource.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -14,12 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -28,31 +21,20 @@ public class UserController {
 
     @Autowired
     UserService userService;
-    @Autowired
-    JwtService jwtService;
 
 
 
     //Get Profile
     @GetMapping("/get-profile")
-    public ResponseEntity<ResponseModel> getProfile(@RequestParam(required = false) String userId,
-                                                    @CurrentSecurityContext(expression = "authentication") Authentication authentication
+    public ResponseEntity<ResponseModel> getProfile(@CurrentSecurityContext(expression = "authentication") Authentication authentication
                                                     ) throws Exception {
         try {
             log.info("Start UserController.getProfile()");
 
-            UserEntity userEntity = new UserEntity();
+            UserDto userDto = userService.getUserProfile(authentication);
 
-            if(userId == null){
-                userEntity = userService.getUserProfile(authentication);
 
-            }
-            else {
-                userEntity = userService.getUserProfileById(userId);
-
-            }
-
-            return ResponseHelper.success(userEntity);
+            return ResponseHelper.success(userDto);
 
         }
 
@@ -68,6 +50,40 @@ public class UserController {
 
 
 
+    @GetMapping("/get-profile-by-id")
+    public ResponseEntity<ResponseModel> getProfileById(@RequestParam(required = false) String userId) throws Exception {
+        try {
+            log.info("Start UserController.getProfileById()");
+
+
+            UserDto userDto = userService.getUserProfileById(userId);
+
+
+            return ResponseHelper.success(userDto);
+
+        }
+
+        catch (Exception e){
+            log.info("Error UserController.getProfileById()");
+            return ResponseHelper.badRequest(HttpStatus.BAD_REQUEST.toString(),e.getMessage());
+        }
+
+        finally {
+            log.info("End UserController.getProfileById()");
+        }
+    }
+
+
+
+
+
+
+
+    //Edit Profile
+
+
+
+
 
 
 
@@ -80,11 +96,23 @@ public class UserController {
         try {
             log.info("Start UserController.updateProfile()");
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            UserDto userDto = objectMapper.readValue(json, UserDto.class);
-            UserEntity userEntity = userService.editProfile(userDto, image, authentication);
+            if(json != null){
+                ObjectMapper objectMapper = new ObjectMapper();
+                UserDto userDto = objectMapper.readValue(json, UserDto.class);
+                userService.editProfileContent(userDto, authentication);
+            }
 
-            return ResponseHelper.success(userEntity);
+            if(image != null)
+            {
+               userService.updateProfileImage(image, authentication);
+            }
+
+            UserDto userDto = userService.getUserProfile(authentication);
+
+
+
+
+            return ResponseHelper.success(userDto);
         }
 
         catch (Exception e){

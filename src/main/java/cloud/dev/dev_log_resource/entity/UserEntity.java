@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 
 @Data
 @Entity
@@ -53,4 +54,9 @@ public class UserEntity {
     @Basic
     @Column(name = "user_status")
     private String userStatus;
+
+    @Basic
+    @Column(name = "user_address")
+    private String userAddress;
+
 }

@@ -2,10 +2,9 @@ package cloud.dev.dev_log_resource.service;
 
 import cloud.dev.dev_log_resource.dto.UserDto;
 import cloud.dev.dev_log_resource.entity.UserEntity;
+import cloud.dev.dev_log_resource.repository.UserDao;
 import cloud.dev.dev_log_resource.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -13,8 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Service
 @Slf4j
@@ -27,6 +26,9 @@ public class UserService {
 
     @Autowired
     JwtService jwtService;
+
+    @Autowired
+    UserDao userDao;
 
     @Value("${spring.amazon.aws.s3Url}")
     private String s3Url;
@@ -77,15 +79,30 @@ public class UserService {
 //
 //    }
 
-    public UserEntity getUserProfile(Authentication authentication) throws Exception{
+    public UserDto getUserProfile(Authentication authentication) throws Exception{
 
-        String cUid = jwtService.getUsername(authentication);
+
         try {
             log.info("Start UserService.getUserProfile()");
 
+            String cUid = jwtService.getUsername(authentication);
             UserEntity userEntity = userRepository.findByCUid(cUid);
+            int blogCount = userDao.getBlogCount(getUserId(cUid)).get(0).getNumberOfPost();
 
-            return  userEntity;
+            UserDto result = new UserDto();
+            result.setUser_id(userEntity.getUserId());
+            result.setUsername(userEntity.getUsername());
+            result.setUserFName(userEntity.getUserFname());
+            result.setUserLName(userEntity.getUserLname());
+            result.setUserEmail(userEntity.getUserEmail());
+            result.setUserAbout(userEntity.getUserAbout());
+            result.setUserSocial(socialToList(userEntity.getUserSocial()));
+            result.setUserPicture(userEntity.getUserPicture());
+            result.setUserAddress(userEntity.getUserAddress());
+            result.setNumberOfPost(blogCount);
+
+
+            return  result;
         }
         catch(Exception e){
             log.info("Error UserService.getUserProfile()");
@@ -99,14 +116,26 @@ public class UserService {
     }
 
 
-    public UserEntity getUserProfileById(String userId) throws Exception{
+    public UserDto getUserProfileById(String userId) throws Exception{
 
         try {
             log.info("Start UserService.getUserProfile()");
 
             UserEntity userEntity = userRepository.findById(Integer.valueOf(userId)).get();
+            UserDto result = new UserDto();
+            int blogCount = userDao.getBlogCount(Integer.parseInt(userId)).get(0).getNumberOfPost();
+            result.setUser_id(userEntity.getUserId());
+            result.setUsername(userEntity.getUsername());
+            result.setUserFName(userEntity.getUserFname());
+            result.setUserLName(userEntity.getUserLname());
+            result.setUserEmail(userEntity.getUserEmail());
+            result.setUserAbout(userEntity.getUserAbout());
+            result.setUserSocial(socialToList(userEntity.getUserSocial()));
+            result.setUserPicture(userEntity.getUserPicture());
+            result.setUserAddress(userEntity.getUserAddress());
+            result.setNumberOfPost(blogCount);
 
-            return  userEntity;
+            return  result;
         }
         catch(Exception e){
             log.info("Error UserService.getUserProfile()");
@@ -119,10 +148,10 @@ public class UserService {
 
     }
 
-    public UserEntity editProfile(UserDto userDto, MultipartFile image, Authentication authentication) throws Exception{
+    public void editProfileContent(UserDto userDto, Authentication authentication) throws Exception{
 
         try {
-            log.info("Start UserService.editProfile()");
+            log.info("Start UserService.editProfileContent()");
             String cUid = jwtService.getUsername(authentication);
 
             UserEntity userEntity = userRepository.findByCUid(cUid);
@@ -135,34 +164,65 @@ public class UserService {
             }
 
             if(userDto.getUserSocial() != null){
-                userEntity.setUserSocial(userDto.getUserSocial());
+                userEntity.setUserSocial(Arrays.toString(userDto.getUserSocial()));
             }
 
             if(userDto.getUserAbout() != null){
                 userEntity.setUserAbout(userDto.getUserAbout());
             }
 
-            if(userDto.getDeleteImage().equals("True")){
-                userEntity.setUserPicture(null);
+
+            if(userDto.getDeleteImage() != null){
+                if(userDto.getDeleteImage().equals("True")) {
+                    userEntity.setUserPicture(null);
+                }
+
+            }
+            if(userDto.getUserAddress() != null){
+                userEntity.setUserAddress(userDto.getUserAddress());
             }
 
-            else {
-                String imageFileName = "user-profile-" + getUserId(cUid);
-                String profileUrl = s3Url + imageFileName;
-                userEntity.setUserPicture(profileUrl);
-                awsS3Service.putImage(image, imageFileName);
-            }
-
-            return userRepository.save(userEntity);
-
+            userRepository.save(userEntity);
 
         }
         catch(Exception e){
-            log.info("Error UserService.editProfile()");
+            log.info("Error UserService.editProfileContent()");
             throw new Exception(HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
         }
         finally {
-            log.info("End UserService.editProfile()");
+            log.info("End UserService.editProfileContent()");
         }
+    }
+
+    public  void updateProfileImage(MultipartFile image, Authentication authentication) throws Exception{
+
+
+        try{
+            log.info("Start UserService.updateProfileImage()");
+
+            String cUid = jwtService.getUsername(authentication);
+            UserEntity userEntity = userRepository.findByCUid(cUid);
+
+            String imageFileName = "user-profile-" + getUserId(cUid);
+            String profileUrl = s3Url + imageFileName;
+            userEntity.setUserPicture(profileUrl);
+            awsS3Service.putImage(image, imageFileName);
+
+        }
+
+        catch(Exception e){
+            log.info("Error UserService.updateProfileImage()");
+            throw new Exception(HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
+        }
+        finally {
+            log.info("End UserService.updateProfileImage()");
+        }
+
+    }
+
+
+    private String[] socialToList(String socialString){
+        String trimString = socialString.replaceAll("^\\[|]$", "");
+        return trimString.split(",");
     }
 }

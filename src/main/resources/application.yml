@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://devlog.cwmrubevoikp.us-east-1.rds.amazonaws.com:3306/devlog
-    username: admin
-    password: devlogpassword
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -10,14 +10,13 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   amazon:
     aws:
-      accesskey: ASIATKFXOLMBXZHCP6GL
-      secretkey: vssxQY7mcOu2tqIxxV9/QeAit/lL5JO5QZPkXC6P
-      sessiontoken: FwoGZXIvYXdzEGQaDAiatu2Xs6A34vOoPyLGAe9L6TloNNIxajyZPDKBGmwZbbw4G+kmrgcUlxbZz4IEBPM0HBEEoX0TX1Vp9jGcK7iq5pksQYGTVgYwdeeeof5psm+BqAlamjgi9EOTMIANpkeYwhfHSciHOzPBx331C9MjYHe4PVBGE+r9J117tlm2TYek8PRgsU217UCWNKtQnyJbrIVEvZsFGgRz+XldLje1fX2NDJfSfnYLusWj+IZO6tJ5qGqA1/EMjZJGt2Vh42uZjKizeq8IbOQp+xMlxxNtq5E1GSip+qKqBjIt2ibyZqGmsZqeqYo/UpWsJB9FAS2vnBzMfYzboZitS8/no0exYasU0g6oHn7G
-
+      accesskey: ${ACCESS_KEY}
+      secretkey: ${SECRET_KEY}
+      sessiontoken: ${SESSION_TOKEN}
       region: us-east-1  # e.g., us-east-1
       endpoint: https://dynamodb.us-east-1.amazonaws.com
-      s3bucket-name: devlogresource
-      s3Url: https://devlogresource.s3.amazonaws.com/
+      s3bucket-name: ${BUCKET_NAME}
+      s3Url: https://${BUCKET_NAME}.s3.amazonaws.com/
   security:
     oauth2:
       resource:
