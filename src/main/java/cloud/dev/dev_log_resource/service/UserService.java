@@ -222,7 +222,13 @@ public class UserService {
 
 
     private String[] socialToList(String socialString){
-        String trimString = socialString.replaceAll("^\\[|]$", "");
-        return trimString.split(",");
+        if(socialString == null){
+            return null;
+        }
+        else {
+            String trimString = socialString.replaceAll("^\\[|]$", "");
+            return trimString.split(",");
+        }
+
     }
 }
